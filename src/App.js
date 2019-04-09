@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       words: [],
       targetProject: null,
-      color: {r: 200, g: 1 , b:19}
+      color: {r: 200, g: 1 , b:19},
+      mixed: false
     };
   }
 
@@ -36,11 +37,13 @@ class App extends Component {
     });
     if(checking){
       this.setState({
-        color: {r: 200, g: 1 , b:19}
+        color: {r: 200, g: 1 , b:19},
+        mixed: true
       })
     }else{
       this.setState({
-        color: {r: 7, g:101 , b:189}
+        color: {r: 7, g:101 , b:189},
+        mixed: false
       })
     }
     
@@ -95,8 +98,10 @@ class App extends Component {
     }
     words = this.shuffle(words);
     this.setState({
-      words: words
+      words: words,
+      mixed: true
     })
+
   }
 
   render() {
@@ -114,7 +119,7 @@ class App extends Component {
     return (
       <div className="App">
           <div className="inner-App">
-            <Input textGetter={this.textToWords.bind(this)}/>
+              {this.state.mixed? null : <Input textGetter={this.textToWords.bind(this)}/> }
               <div className="words"> 
                 {project} 
               </div>
