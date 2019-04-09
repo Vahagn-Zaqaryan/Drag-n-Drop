@@ -5,6 +5,11 @@
     transform: translate(-50%, -50%);
 }
 
+.App .error{
+    color: rgb(194, 49, 49);
+    margin-bottom: 10px;
+}
+
 .App .inner-App{
     display: flex;
     align-content: center;

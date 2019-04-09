@@ -10,7 +10,8 @@ class App extends Component {
       words: [],
       targetProject: null,
       color: {r: 200, g: 1 , b:19},
-      mixed: false
+      mixed: false,
+      errMassage: null
     };
   }
 
@@ -93,15 +94,23 @@ class App extends Component {
     text = text.charAt(0).toUpperCase() + text.slice(1);
     let wordsArr = text.split(" ");
     let words = [];
-    for (let i in wordsArr){
-      words.push({id: uuid.v4(), name: wordsArr[i], order: parseInt(i)});
+    
+    if(wordsArr.length <= 2){
+      if(wordsArr.length === 1)
+        this.setState({ errMassage: "You have to add at least 2 more words!" })
+      else
+        this.setState({ errMassage: "You have to add at least 1 more word!" })
+    }else{
+      for (let i in wordsArr){
+        words.push({id: uuid.v4(), name: wordsArr[i], order: parseInt(i)});
+      }
+      words = this.shuffle(words);
+      this.setState({
+        words: words,
+        mixed: true,
+        errMassage: null
+      })
     }
-    words = this.shuffle(words);
-    this.setState({
-      words: words,
-      mixed: true
-    })
-
   }
 
   render() {
@@ -118,12 +127,13 @@ class App extends Component {
     })
     return (
       <div className="App">
-          <div className="inner-App">
-              {this.state.mixed? null : <Input textGetter={this.textToWords.bind(this)}/> }
-              <div className="words"> 
-                {project} 
-              </div>
-          </div>
+        <div className="error">{this.state.errMassage}</div>
+        <div className="inner-App">
+            {this.state.mixed? null : <Input textGetter={this.textToWords.bind(this)}/> }
+            <div className="words"> 
+              {project} 
+            </div>
+        </div>
       </div>
     );
   }
