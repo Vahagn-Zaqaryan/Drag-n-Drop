@@ -3,6 +3,7 @@
 }
 
 .inputs form input{
+    text-transform: capitalize;
     position: relative;
     transition: all .3s;
     box-sizing: border-box;

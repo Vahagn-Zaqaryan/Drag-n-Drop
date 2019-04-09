@@ -7,9 +7,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      words: [ ],
+      words: [],
       targetProject: null,
-      color: {r: 7, g:101 , b:189}
+      color: {r: 200, g: 1 , b:19}
     };
   }
 
@@ -75,12 +75,25 @@ class App extends Component {
     }
   }
 
+  shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+  }
+
   textToWords(text){
+    text = text.charAt(0).toUpperCase() + text.slice(1);
     let wordsArr = text.split(" ");
     let words = [];
     for (let i in wordsArr){
       words.push({id: uuid.v4(), name: wordsArr[i], order: parseInt(i)});
     }
+    words = this.shuffle(words);
     this.setState({
       words: words
     })
