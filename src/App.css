@@ -5,8 +5,9 @@
     transform: translate(-50%, -50%);
 }
 
-.App .error{
+.App .inner-App .error{
     color: rgb(194, 49, 49);
+    align-self: center;
     margin-bottom: 10px;
 }
 
