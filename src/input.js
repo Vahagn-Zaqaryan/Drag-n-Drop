@@ -16,8 +16,8 @@ class App extends Component {
     })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
     this.props.textGetter(this.state.text);
   }
   render(props) {
