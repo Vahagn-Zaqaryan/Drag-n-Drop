@@ -18,12 +18,9 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-      text: ''
-    })
     this.props.textGetter(this.state.text);
   }
-  render() {
+  render(props) {
     return (
       <div className="inputs">
         <form onSubmit={this.handleSubmit}>

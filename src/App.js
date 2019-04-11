@@ -11,7 +11,8 @@ class App extends Component {
       targetProject: null,
       color: {r: 200, g: 1 , b:19},
       mixed: false,
-      errMassage: null
+      errMassage: null,
+      text: ''
     };
   }
 
@@ -100,9 +101,9 @@ class App extends Component {
       
       if(wordsArr.length <= 2){
         if(wordsArr.length === 1)
-          this.setState({ errMassage: "You have to add at least 2 more words!" })
+          this.setState({ errMassage: "Ok.. type at least 2 more words!" })
         else
-          this.setState({ errMassage: "You have to add at least 1 more word!" })
+          this.setState({ errMassage: "Humm... type at least 1 more word!" })
       }else{
         for (let i in wordsArr){
           words.push({id: uuid.v4(), name: wordsArr[i], order: parseInt(i)});
@@ -111,7 +112,8 @@ class App extends Component {
         this.setState({
           words: words,
           mixed: true,
-          errMassage: null
+          errMassage: null,
+          color: {r: 200, g: 1 , b:19}
         })
       }
     }
@@ -133,7 +135,7 @@ class App extends Component {
       <div className="App">
         <div className="inner-App">
           <div className="error">{this.state.errMassage}</div>
-            {this.state.mixed? null : <Input textGetter={this.textToWords.bind(this)}/> }
+            {this.state.mixed? null : <Input textGetter={this.textToWords.bind(this)} text={this.state.text}/> }
             <div className="words"> 
               {project} 
             </div>
